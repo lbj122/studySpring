@@ -14,10 +14,32 @@ import com.study.service.SampleService;
 public class SampleController {
     @Resource(name="sampleService")
     private SampleService sampleService;
-
-    @RequestMapping(value="/sample.do")
+    
+    @RequestMapping(value="/index.do")
+    public ModelAndView Index(Map<String,Object> commandMap) throws Exception{
+        ModelAndView mv = new ModelAndView("index");
+        return mv;
+    }
+    
+    @RequestMapping(value="/blog.do")
     public ModelAndView Sample(Map<String,Object> commandMap) throws Exception{
         ModelAndView mv = new ModelAndView("blog");
+        String test = sampleService.sampleString();
+        mv.addObject("test", test);
+        return mv;
+    }
+    
+    @RequestMapping(value="/test.do")
+    public ModelAndView test(Map<String,Object> commandMap) throws Exception{
+        ModelAndView mv = new ModelAndView("test");
+        String test = sampleService.sampleString();
+        mv.addObject("test", test);
+        return mv;
+    }
+    
+    @RequestMapping(value="/include/test.do")
+    public ModelAndView test2(Map<String,Object> commandMap) throws Exception{
+        ModelAndView mv = new ModelAndView("/include/test");
         String test = sampleService.sampleString();
         mv.addObject("test", test);
         return mv;
