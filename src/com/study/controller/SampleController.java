@@ -24,11 +24,11 @@ public class SampleController {
         log.debug("log ::: Main page");
         return mv;
     }
-    
+    /*Å×½ºÆ®*/
     @RequestMapping(value="/blog.do")
     public ModelAndView Sample(Map<String,Object> commandMap) throws Exception{
         ModelAndView mv = new ModelAndView("blog");
-        log.debug("log ::: blog Page");
+        log.debug("log ::: blog Page222");
         String test = sampleService.sampleString();
         mv.addObject("test", test);
         return mv;
