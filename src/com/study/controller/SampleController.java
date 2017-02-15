@@ -28,7 +28,7 @@ public class SampleController {
     @RequestMapping(value="/blog.do")
     public ModelAndView Sample(Map<String,Object> commandMap) throws Exception{
         ModelAndView mv = new ModelAndView("blog");
-        log.debug("log ::: blog Page222");
+        log.debug("log ::: blog Page333");
         String test = sampleService.sampleString();
         mv.addObject("test", test);
         return mv;
