@@ -39,6 +39,7 @@ public class SampleController {
         ModelAndView mv = new ModelAndView("test");
         String test = sampleService.sampleString();
         mv.addObject("test", test);
+        mv.addObject("git", "merge test");
         return mv;
     }
     
