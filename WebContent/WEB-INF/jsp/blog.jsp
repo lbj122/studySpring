@@ -18,7 +18,7 @@
 							<div id="sportswear" class="panel-collapse collapse">
 								<div class="panel-body">
 									<ul>
-										<li><a href="">Nike test </a></li>
+										<li><a href="">Nike test1 </a></li>
 										<li><a href="">Under Armour </a></li>
 										<li><a href="">Adidas </a></li>
 										<li><a href="">Puma</a></li>
