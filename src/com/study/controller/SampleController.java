@@ -1,5 +1,6 @@
 package com.study.controller;
 
+import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
@@ -24,7 +25,7 @@ public class SampleController {
         log.debug("log ::: Main page");
         return mv;
     }
-    /*테스트*/
+   /* 테스트
     @RequestMapping(value="/blog.do")
     public ModelAndView Sample(Map<String,Object> commandMap) throws Exception{
         ModelAndView mv = new ModelAndView("blog");
@@ -32,22 +33,23 @@ public class SampleController {
         String test = sampleService.sampleString();
         mv.addObject("test", test);
         return mv;
-    }
+    }*/
     
     @RequestMapping(value="/test.do")
     public ModelAndView test(Map<String,Object> commandMap) throws Exception{
         ModelAndView mv = new ModelAndView("test");
-        String test = sampleService.sampleString();
+        String num = "1";
+        List<Map<String, Object>> test = sampleService.selectName(num);
         mv.addObject("test", test);
         mv.addObject("git", "merge test");
         return mv;
     }
     
-    @RequestMapping(value="/include/test.do")
+    /*@RequestMapping(value="/include/test.do")
     public ModelAndView test2(Map<String,Object> commandMap) throws Exception{
         ModelAndView mv = new ModelAndView("/include/test");
         String test = sampleService.sampleString();
         mv.addObject("test", test);
         return mv;
-    }
+    }*/
 }
