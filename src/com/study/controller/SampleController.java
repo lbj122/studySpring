@@ -25,7 +25,7 @@ public class SampleController {
         log.debug("log ::: Main page");
         return mv;
     }
-   /* �׽�Ʈ
+   /* �׽�Ʈ
     @RequestMapping(value="/blog.do")
     public ModelAndView Sample(Map<String,Object> commandMap) throws Exception{
         ModelAndView mv = new ModelAndView("blog");
@@ -52,4 +52,10 @@ public class SampleController {
         mv.addObject("test", test);
         return mv;
     }*/
+    
+    @RequestMapping(value="/roulette.do")
+    public ModelAndView roulette(Map<String,Object> commandMap) throws Exception{
+        ModelAndView mv = new ModelAndView("roulette");
+        return mv;
+    }
 }
