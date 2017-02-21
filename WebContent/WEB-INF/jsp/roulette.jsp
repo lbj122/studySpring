@@ -3,7 +3,7 @@
 	#image{
 	  margin:50px 50px;z-index:10;
 	}
-	#n_id{position:absolute;left:447px;top:0px;z-index:20;}
+	#n_id{position:relative;left:-257px;top:-180px;z-index:20;}
 </style>
 
 	<div class="container">
