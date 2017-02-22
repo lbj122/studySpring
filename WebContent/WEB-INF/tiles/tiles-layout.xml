@@ -14,9 +14,11 @@
 	<definition name="*.do" extends="layouts-tiles">
         <put-attribute name="content" value="/WEB-INF/jsp/{1}.jsp" />
     </definition>
-    <definition name="*/*.do" extends="layouts-tiles">
+	
+	<definition name="*/*.do" extends="layouts-tiles">
         <put-attribute name="content" value="/WEB-INF/jsp/{1}/{2}.jsp" />
     </definition>
+    
     <definition name="*/*/*.do" extends="layouts-tiles">
         <put-attribute name="content" value="/WEB-INF/jsp/{1}/{2}/{3}.jsp" />
     </definition>

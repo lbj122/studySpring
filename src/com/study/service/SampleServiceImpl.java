@@ -16,7 +16,12 @@ public class SampleServiceImpl implements SampleService{
 	private SampleDAO sampleDAO;
 		
 	@Override
-	public List<Map<String, Object>> selectName(String num){
-		return sampleDAO.selectName(num);
+	public List<Map<String, Object>> artistList(){
+		return sampleDAO.artistList();
+	}
+	
+	@Override
+	public List<Map<String, Object>> goodsList(String no){
+		return sampleDAO.goodsList(no);
 	}
 }

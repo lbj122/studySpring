@@ -9,8 +9,11 @@ import org.springframework.stereotype.Repository;
 public class SampleDAO extends AbstractDAO{
 	
 	@SuppressWarnings("unchecked")
-	public List<Map<String, Object>> selectName(String num){
-		log.debug(num);
-		return (List<Map<String, Object>>)selectList("sample.selectName", num);
+	public List<Map<String, Object>> artistList(){
+		return (List<Map<String, Object>>)selectList("sample.artistList");
+	}
+	@SuppressWarnings("unchecked")
+	public List<Map<String, Object>> goodsList(String no){
+		return (List<Map<String, Object>>)selectList("sample.goodsList", no);
 	}
 }

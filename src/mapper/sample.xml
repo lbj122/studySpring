@@ -2,12 +2,23 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
  
 <mapper namespace="sample">
-   <select id="selectName" parameterType="string" resultType="hashmap">
+   <select id="artistList" parameterType="string" resultType="hashmap">
         <![CDATA[
-            SELECT
-                ARTIST_NM
-            FROM
-                BT_ARTIST
+            select
+                artist_nm, artist_no
+            from
+                bt_artist
+        ]]>
+    </select>
+    
+    <select id="goodsList" parameterType="string" resultType="hashmap">
+        <![CDATA[
+            select pg.good_no, pg.good_nm, ba.artist_no, ba.artist_nm
+			  from pv_good pg, bt_artist ba, bt_goods_artist_work bg
+			 where ba.artist_no = #{no}
+			   and ba.artist_no = bg.artist_no
+			   and bg.good_no = pg.good_no
+			   order by artist_no
         ]]>
     </select>
 </mapper>

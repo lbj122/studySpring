@@ -37,11 +37,26 @@
 		<property name="preparerFactoryClass"
 			value="org.springframework.web.servlet.view.tiles2.SpringBeanPreparerFactory" />
 	</bean>
-	<bean id="viewResolver"
+	<bean id="tilesViewResolver"
 		class="org.springframework.web.servlet.view.UrlBasedViewResolver">
 		<property name="viewClass"
 			value="org.springframework.web.servlet.view.tiles2.TilesView" />
 		<!-- TilesView를 매핑할때 뷰 이름에 .do를 붙여서 넘긴다 -->
 		<property name="suffix" value=".do" />
+		<property name="order" value="1" />
 	</bean>
+	<bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
+		<property name="messageConverters">
+			<list>
+				<ref bean="jsonConverter" />
+				<!-- <ref bean="marshallingConverter" /> <ref bean="atomConverter" /> -->
+			</list>
+		</property>
+	</bean>
+
+	<bean id="jsonConverter"
+		class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter">
+		<property name="supportedMediaTypes" value="application/json" />
+	</bean>
+	
 </beans>
