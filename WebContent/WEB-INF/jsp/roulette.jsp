@@ -12,7 +12,7 @@
 				<img src="images/roulette.png" id="image"> 
 				<img src="images/choice.png" id="n_id">
 				<br /> <br />
-				<input type='button' value='시작!' id='start_btn'></input>
+				<input type='button' value='시작!' id='start_btn' onclick='javascript:rotation()'></input>
 				<div id="result_id"></div>
 				<div id="result_id2"></div>
 				<div id="result_id3"></div>
@@ -20,7 +20,8 @@
 		</div>
 	</div>
 	<br /><br />
-<script>
+	<script data-main="/js/roulette" src="/js/common/require.js"></script>
+<!-- <script>
 /* serpiko.tistory.com */
 window.onload = function(){
      
@@ -68,4 +69,4 @@ window.onload = function(){
         return Math.floor(Math.random() * ($max - $min + 1)) + $min;
     }
 };
-</script>
+</script> -->

@@ -32,9 +32,11 @@ public class SampleController {
     
     @RequestMapping(value="/goods.do")
     public ModelAndView test(Map<String,Object> commandMap) throws Exception{
+    	JSONObject jObj = new JSONObject();
         ModelAndView mv = new ModelAndView("goods");
         List<Map<String, Object>> artistList = sampleService.artistList();
-        mv.addObject("artistList", artistList);
+        jObj.put("artistList", artistList);
+        mv.addObject("artist", jObj.toString());
         return mv;
     }
     

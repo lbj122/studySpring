@@ -2,9 +2,9 @@
 <%@page import="java.util.*" %>
 
 <%
-	List<Map<String, Object>> artistList = (List<Map<String, Object>>)request.getAttribute("artistList"); 
+	String artistList = (String)request.getAttribute("artist"); 
 %>
-
+<input type='hidden' value = '<%=artistList %>' id='artistData'>
 <section>
 	<div class="container">
 		<div class="row">
@@ -12,43 +12,31 @@
 				<div class="left-sidebar">
 					<h2>Category</h2>
 					<div class="panel-group category-products" id="accordian">
-						<!--category-productsr-->
-						<!-- <div class="panel panel-default">
-							<div class="panel-heading">
-								<h4 class="panel-title">
-									<a data-toggle="collapse" data-parent="#accordian"
-										href="#sportswear"> <span class="badge pull-right"><i
-											class="fa fa-plus"></i></span> Sportswear
-									</a>
-								</h4>
-							</div>
-							<div id="sportswear" class="panel-collapse collapse">
-								<div class="panel-body">
-									<ul>
-										<li><a href="#">Nike </a></li>
-										<li><a href="#">Under Armour </a></li>
-										<li><a href="#">Adidas </a></li>
-										<li><a href="#">Puma</a></li>
-										<li><a href="#">ASICS </a></li>
-									</ul>
-								</div>
-							</div>
-						</div> -->
-<%
-if(null != artistList){
-	for(int i = 0; i < artistList.size(); i++){
-%>						
+						<script id="artist" type="text/x-handlebars-template">
+						{{#each category}}
 						<div class="panel panel-default">
 							<div class="panel-heading">
 								<h4 class="panel-title">
-									<a href=javascript:getGoodsList(<%=artistList.get(i).get("ARTIST_NO") %>)><%=artistList.get(i).get("ARTIST_NM") %></a>
+									<a data-toggle="collapse" data-parent="#accordian"
+										href="{{categoryId}}"> <span class="badge pull-right"><i
+											class="fa fa-plus"></i></span> {{categoryNum}}
+									</a>
 								</h4>
 							</div>
+							<div id="{{categoryNum}}" class="panel-collapse collapse">
+								<div class="panel-body">
+									<ul>
+										{{#each ../artist}}
+											{{#ifCond category ../categoryNum}}
+												<li><a href=javascript:getGoodsList({{ARTIST_NO}})>{{ARTIST_NM}}</a></li>
+											{{/ifCond}}
+										{{/each}}
+									</ul>
+								</div>
+							</div>
 						</div>
-<%
-	}
-}
-%>
+						{{/each}}
+						</script>
 					</div>
 					<!--/category-products-->
 				</div>
@@ -58,7 +46,38 @@ if(null != artistList){
 				<div class="features_items"	>
 					<!--features_items-->
 					<h2 class="title text-center">Features Items</h2>
+					<script id="goods" type="text/x-handlebars-template">
+					{{#goods}}
+					<div class="col-sm-4">
+						<div class="product-image-wrapper">
+							<div class="single-products">
+								<div class="productinfo text-center">
+									<img src="images/home/product1.jpg" alt="" />
+									<h2>{{GOOD_NM}}</h2>
+									<p>{{GOOD_NO}}</p>
+									<p>{{ARTIST_NM}}</p>
+									<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+								</div>
+								<div class="product-overlay">
+									<div class="overlay-content">
+										<h2>{{GOOD_NM}}</h2>
+										<p>{{GOOD_NO}}</p>
+										<p>{{ARTIST_NM}}</p>
+										<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+									</div>
+								</div>
+							</div>
+							<div class="choose">
+								<ul class="nav nav-pills nav-justified">
+								<li><a href="#"><i class="fa fa-plus-square"></i>Add to wishlist</a></li>
+								<li><a href="#"><i class="fa fa-plus-square"></i>Add to compare</a></li>
+							</div>
+						</div>
+					</div>
+					{{/goods}}
+					</script>
 					<div id="goodsList">
+					
 					</div>
 
 				</div>
@@ -67,65 +86,4 @@ if(null != artistList){
 		</div>
 	</div>
 </section>
-
-<script>
-function getGoodsList(no){
-	$.ajax({
-		url : "/goodsList.do",
-		type : "post",
-		data : {
-			no : no
-		},
-		success : function(result) {
-			var goodsList = result.goodsList;
-			var html = "";
-			var goodsNM = "";
-			var length = goodsList.length;
-			if(length > 12){
-				length = 12
-			}
-			for(var i = 0; i<length; i++){
-				if(goodsList[i].GOOD_NM != null){
-					goodsNM = goodsList[i].GOOD_NM;
-					if(goodsNM.length > 10){
-						goodsNM = goodsNM.substring(0,9) +"...";	
-					}
-				}
-				html += '<div class="col-sm-4">';
-				html += '<div class="product-image-wrapper">';
-				html += '<div class="single-products">';
-				html += '<div class="productinfo text-center">';
-				html += '<img src="images/home/product1.jpg" alt="" />';
-				html += '<h2>'+goodsNM+'</h2>';
-				html += '<p>'+goodsList[i].GOOD_NO+'</p>';
-				html += '<p>'+goodsList[i].ARTIST_NM+'</p>';
-				html += '<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>';
-				html += '</div>';
-				html += '<div class="product-overlay">';
-				html += '<div class="overlay-content">';
-				html += '<h2>'+goodsNM+'</h2>';
-				html += '<p>'+goodsList[i].GOOD_NO+'</p>';
-				html += '<p>'+goodsList[i].ARTIST_NM+'</p>';
-				html += '<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>';
-				html += '</div>';
-				html += '</div>';
-				html += '</div>';
-				html += '<div class="choose">';
-				html += '<ul class="nav nav-pills nav-justified">';
-				html += '<li><a href="#"><i class="fa fa-plus-square"></i>Add to wishlist</a></li>';
-				html += '<li><a href="#"><i class="fa fa-plus-square"></i>Add to compare</a></li>';
-				html += '</ul>';
-				html += '</div>';
-				html += '</div>';
-				html += '</div>';
-			}
-			html += "</table>";
-			$("#goodsList").html(html);
-		},
-		error : function(xhr, status, error) {
-			alert("에러발생");
-		}
-	});	
-}
-
-</script>	
+<script data-main="/js/goods" src="/js/common/require.js"></script>

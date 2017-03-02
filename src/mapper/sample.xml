@@ -8,12 +8,13 @@
                 artist_nm, artist_no
             from
                 bt_artist
+             order by artist_nm
         ]]>
     </select>
     
     <select id="goodsList" parameterType="string" resultType="hashmap">
         <![CDATA[
-            select pg.good_no, pg.good_nm, ba.artist_no, ba.artist_nm
+            select pg.good_no, substr(pg.good_nm,0,5) good_nm, ba.artist_no, ba.artist_nm
 			  from pv_good pg, bt_artist ba, bt_goods_artist_work bg
 			 where ba.artist_no = #{no}
 			   and ba.artist_no = bg.artist_no
